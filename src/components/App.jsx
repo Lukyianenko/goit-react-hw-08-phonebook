@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import PropTypes from 'prop-types';
 import { fetchContacts } from "../redux/fetchContacts";
@@ -7,28 +8,29 @@ import {AddContscts} from './BookContacts/AddContact';
 import { ListContacts } from './BookContacts/ListContacts';
 import { Filter } from './BookContacts/FilterContacts';
 import { Title } from './BookContacts/BookContacts.styled';
+import { AppBar } from "./AppBar/AppBar";
+
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { useAuth } from 'hooks';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101'
-        }}
-      >
+      <div>
+      <AppBar />
         <Title>Phonebook</Title>
       <AddContscts />
       <Filter/>
