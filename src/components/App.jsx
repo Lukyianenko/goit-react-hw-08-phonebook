@@ -1,20 +1,12 @@
 import { useEffect } from "react";
-import { NavLink, Route, Routes } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux/es/exports";
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from "react-redux/es/exports";
 import PropTypes from 'prop-types';
-import { fetchContacts } from "../redux/fetchContacts";
-import { getIsLoading, getError } from "../redux/selectors";
-import {AddContscts} from './BookContacts/AddContact';
-import { ListContacts } from './BookContacts/ListContacts';
-import { Filter } from './BookContacts/FilterContacts';
-import { Title } from './BookContacts/BookContacts.styled';
-import { AppBar } from "./AppBar/AppBar";
-
 import { Layout } from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
-import { useAuth } from 'hooks';
+import { useAuth } from '../hooks/useAuth';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,20 +16,43 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-    return (
-      <div>
-      <AppBar />
-        <Title>Phonebook</Title>
-      <AddContscts />
-      <Filter/>
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ListContacts/>
-      </div>
-    );  
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+          }
+        />
+      </Route>
+    </Routes>
+  );
+    // return (
+    //   <div>
+    //   <AppBar />
+    //     <Title>Phonebook</Title>
+    //   <AddContscts />
+    //   <Filter/>
+    //   {isLoading && !error && <b>Request in progress...</b>}
+    //   <ListContacts/>
+    //   </div>
+    // );  
 };
 
 
