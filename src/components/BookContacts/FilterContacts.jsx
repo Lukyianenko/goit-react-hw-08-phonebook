@@ -1,6 +1,6 @@
 import { LabelFilt } from './BookContacts.styled';
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { onFilter } from '../../redux/contactsSlice';
+import { onFilter } from '../../redux/contacts/slice';
 import { getStatusFilter } from "../../redux/selectors";
 
 export const Filter = () => {

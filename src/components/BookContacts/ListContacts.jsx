@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { TitleContact, List, ContList, ButtonList, ItemList } from './BookContacts.styled';
 import { getContacts } from "../../redux/selectors";
-import { deleteContacts } from "../../redux/deleteContact";
+import { deleteContact } from "../../redux/contacts/operations";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 
 export const ListContacts = () => {
@@ -12,7 +12,7 @@ export const ListContacts = () => {
     const normalizeFiltr = filtr.toLowerCase();
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFiltr));
 
-    const onDelete = (id) => dispatch(deleteContacts(id));
+    const onDelete = (id) => dispatch(deleteContact(id));
 
     return (
     <ContList>

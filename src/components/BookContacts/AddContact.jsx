@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import { Label, Form, Input, Button } from './BookContacts.styled';
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { addContact } from "../../redux/addContact";
+import { addContact } from "../../redux/contacts/operations";
 import { getContacts } from "../../redux/selectors";
 
 export const AddContscts = () => {
