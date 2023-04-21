@@ -64,6 +64,11 @@ export const contactsSlice = createSlice({
             state.contacts.isLoading = false;
             state.contacts.error = action.payload;
           },
+          [logOut.fulfilled](state) {
+            state.items = [];
+            state.error = null;
+            state.isLoading = false;
+          },
           }
         })
 
