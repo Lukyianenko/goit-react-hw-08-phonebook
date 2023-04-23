@@ -11,10 +11,10 @@ import { persistStore,
         REGISTER,  } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistConfig = {
-    key: 'root',
-    storage,
-  }
+// const persistConfig = {
+//     key: 'root',
+//     storage,
+//   }
 
   const authPersistConfig = {
     key: 'auth',
@@ -22,12 +22,12 @@ const persistConfig = {
     whitelist: ['token'],
   };
 
-  const persistedContactsReducer = persistReducer(persistConfig, contactsReducer);
+  // const persistedContactsReducer = persistReducer(persistConfig, contactsReducer);
 
 export const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
-        contact: persistedContactsReducer,
+        contact: contactsReducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

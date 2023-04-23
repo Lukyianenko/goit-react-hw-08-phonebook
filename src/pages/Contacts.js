@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import { ListContacts } from '../components/BookContacts/ListContacts';
 import { AddContscts } from '../components/BookContacts/AddContact';
 import { Filter } from '../components/BookContacts/FilterContacts';
@@ -17,9 +17,9 @@ export default function Contacts() {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>Your tasks</title>
-      </Helmet>
+      </Helmet> */}
       <AddContscts />
       <Filter />
       <div>{isLoading && 'Request in progress...'}</div>

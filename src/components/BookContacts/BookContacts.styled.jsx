@@ -17,12 +17,15 @@ export const Label = styled.label`
 `
 
 export const Form = styled.form`
+    width: 350px;
     border: 3px solid #44baff;
     border-radius: 45px;
     background-color: #a9fbff;
     padding: 30px 40px;
     text-align: center;
     margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
 `
 
 export const Input = styled.input`
@@ -47,6 +50,9 @@ export const LabelFilt = styled.label`
     font-size: 24px;
     padding: 15px;
     background-color: aquamarine;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 `
 
 export const TitleContact = styled.h2`
